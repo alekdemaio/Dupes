@@ -8,8 +8,8 @@
 import UIKit
 import PhotosUI
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
+class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, PHPickerViewControllerDelegate {
+
     var imageView = UIImageView()
 
     override func viewDidLoad() {
@@ -28,12 +28,27 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         dismiss(animated: true)
     }
     
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        print(results)
+        picker.dismiss(animated: true)
+    }
+    
     @IBAction func openGalleryBtn(_ sender: UIButton) {
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
         imagePickerController.allowsEditing = true
         imagePickerController.sourceType = .photoLibrary
         present(imagePickerController, animated: true)
+    }
+    
+    @IBAction func _openGalleryBtn(_ sender: Any) {
+        var configuration = PHPickerConfiguration()
+        configuration.selectionLimit = 0 // 0 = unlimited, set to any number you want
+        configuration.filter = .images
+
+        let picker = PHPickerViewController(configuration: configuration)
+        picker.delegate = self
+        present(picker, animated: true)
     }
     
     func addImageView() {
