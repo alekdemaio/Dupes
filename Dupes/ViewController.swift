@@ -10,35 +10,20 @@ import PhotosUI
 //import PHPhotoLibrary //look into this, probably method to remove pics
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, PHPickerViewControllerDelegate {
-
-    var imageView = UIImageView()
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        addImageView()
-    }
     
     // Request authorization to modify the photo library
     func requestPhotoLibraryAuthorization() {
-        PHPhotoLibrary.requestAuthorization { status in
-            switch status {
-            case .authorized, .limited:
-                print("Photo library access granted")
-            default:
-                print("Photo library access denied")
+        PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
+            DispatchQueue.main.async {
+                switch status {
+                case .authorized, .limited:
+                    print("Photo library access granted")
+                default:
+                    print("Photo library access blocked")
+                    //implement popup
+                }
             }
         }
-    }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
-        if let image = info[.editedImage] as? UIImage {
-            imageView.image = image
-        } else if let image = info[.originalImage] as? UIImage {
-            imageView.image = image
-        }
-        
-        dismiss(animated: true)
     }
     
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
@@ -57,7 +42,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         picker.dismiss(animated: true)
     }
     
-
     func deletePhotos(withAssetIdentifiers assets: [PHAsset]) {
         let assetIdentifiers = assets.map { $0.localIdentifier } // Extract localIdentifiers
 
@@ -81,16 +65,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             }
         }
     }
-
-    @IBAction func openGalleryBtn(_ sender: UIButton) {
-        let imagePickerController = UIImagePickerController()
-        imagePickerController.delegate = self
-        imagePickerController.allowsEditing = true
-        imagePickerController.sourceType = .photoLibrary
-        present(imagePickerController, animated: true)
-    }
     
-    @IBAction func _openGalleryBtn(_ sender: Any) {
+    @IBAction func openGalleryBtn(_ sender: Any) {
+        requestPhotoLibraryAuthorization()
         var configuration = PHPickerConfiguration(photoLibrary: .shared())
         configuration.selectionLimit = 0 // 0 = unlimited, set to any number you want
         configuration.filter = .images
@@ -98,23 +75,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let picker = PHPickerViewController(configuration: configuration)
         picker.delegate = self
         present(picker, animated: true)
-    }
-    
-    func addImageView() {
-        imageView = UIImageView()
-        imageView.layer.cornerRadius = 10
-        imageView.contentMode = .scaleAspectFill
-        imageView.backgroundColor = .gray
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.clipsToBounds = true
-        view.addSubview (imageView)
-        
-        NSLayoutConstraint.activate([
-            imageView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 0),
-            imageView.centerXAnchor.constraint (equalTo: view.centerXAnchor, constant: 0),
-            imageView.heightAnchor.constraint(equalToConstant: 200),
-            imageView.widthAnchor.constraint (equalTo: imageView.heightAnchor, multiplier: 1),
-        ])
     }
 }
 
