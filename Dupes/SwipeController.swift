@@ -6,12 +6,15 @@
 //
 
 import UIKit
+import PhotosUI
 
 class SwipeController: UIViewController {
+    
+    var assetsToDelete: [PHAsset] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        print(assetsToDelete)
         // Do any additional setup after loading the view.
     }
     

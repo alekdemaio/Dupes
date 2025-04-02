@@ -39,7 +39,6 @@
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="openGalleryBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HMQ-Lf-Iud"/>
-                                    <segue destination="Vai-hy-zIp" kind="show" identifier="toSwipeController" id="DdQ-o6-tHp"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -47,10 +46,13 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="Qrg-0A-gqO"/>
+                    <connections>
+                        <segue destination="Vai-hy-zIp" kind="show" identifier="toSwipeController" id="H7b-j0-vdk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1028.2442748091603" y="4.9295774647887329"/>
+            <point key="canvasLocation" x="1033" y="5"/>
         </scene>
         <!--Swipe Controller-->
         <scene sceneID="fay-8D-i5Q">

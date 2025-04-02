@@ -11,6 +11,8 @@ import PhotosUI
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, PHPickerViewControllerDelegate {
     
+    var assetsToDelete: [PHAsset] = []
+    
     // Request authorization to modify the photo library
     func requestPhotoLibraryAuthorization() {
         PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
@@ -28,7 +30,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         // Collect assets to delete
-        var assetsToDelete: [PHAsset] = []
+        //assetsToDelete moved line ^^
         for result in results {
             print(result.assetIdentifier ?? "no value")
             if let assetIdentifier = result.assetIdentifier {
@@ -66,6 +68,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
     }
     
+    // Prepare data before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toSwipeController",
+           let destinationVC = segue.destination as? SwipeController {
+            destinationVC.assetsToDelete = assetsToDelete
+        }
+    }
     @IBAction func openGalleryBtn(_ sender: Any) {
         requestPhotoLibraryAuthorization()
         var configuration = PHPickerConfiguration(photoLibrary: .shared())
@@ -75,6 +84,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let picker = PHPickerViewController(configuration: configuration)
         picker.delegate = self
         present(picker, animated: true)
+        performSegue(withIdentifier: "toSwipeController", sender: self)
     }
 }
 
