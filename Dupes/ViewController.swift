@@ -38,10 +38,15 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 assetsToDelete.append(fetchResult.object(at: 0))
             }
         }
-        deletePhotos(withAssetIdentifiers: assetsToDelete)
+        //deletePhotos(withAssetIdentifiers: assetsToDelete)
         print(assetsToDelete)
         print(results)
         picker.dismiss(animated: true)
+        if !self.assetsToDelete.isEmpty {
+            self.performSegue(withIdentifier: "toSwipeController", sender: self)
+        } else {
+            print("No assets selected")
+        }
     }
     
     func deletePhotos(withAssetIdentifiers assets: [PHAsset]) {
@@ -72,7 +77,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toSwipeController",
            let destinationVC = segue.destination as? SwipeController {
-            destinationVC.assetsToDelete = assetsToDelete
+            print(!assetsToDelete.isEmpty)
+            destinationVC.assetsToDelete = self.assetsToDelete
         }
     }
     @IBAction func openGalleryBtn(_ sender: Any) {
@@ -84,7 +90,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let picker = PHPickerViewController(configuration: configuration)
         picker.delegate = self
         present(picker, animated: true)
-        performSegue(withIdentifier: "toSwipeController", sender: self)
     }
 }
 

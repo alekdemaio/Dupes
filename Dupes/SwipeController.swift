@@ -10,12 +10,32 @@ import PhotosUI
 
 class SwipeController: UIViewController {
     
+    @IBOutlet weak var imageView: UIImageView!
     var assetsToDelete: [PHAsset] = []
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         print(assetsToDelete)
         // Do any additional setup after loading the view.
+        // Create an instance of PHImageRequestOptions
+        let options = PHImageRequestOptions()
+        options.isSynchronous = false         // Perform asynchronously (do not block the main thread)
+        options.isNetworkAccessAllowed = true // Allow fetching from iCloud if image is not available locally
+        options.deliveryMode = .highQualityFormat // Request high-quality format
+        PHImageManager.default().requestImage(for: assetsToDelete[0], targetSize: PHImageManagerMaximumSize, contentMode: .aspectFit, options: options, resultHandler: { image, info in
+                if let image = image {
+                    // Image was successfully retrieved
+                    // Do something with the image (e.g., display it in an UIImageView)
+                    DispatchQueue.main.async {
+                        // Example: Set the image to an image view
+                        self.imageView.image = image
+                    }
+                } else {
+                    // Handle the error or case where the image is nil
+                    print("Failed to retrieve image.")
+                }
+            }
+        )
     }
     
 

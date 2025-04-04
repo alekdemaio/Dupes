@@ -57,18 +57,27 @@
         <!--Swipe Controller-->
         <scene sceneID="fay-8D-i5Q">
             <objects>
-                <viewController storyboardIdentifier="SwipeController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Vai-hy-zIp" customClass="SwipeController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SwipeController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Vai-hy-zIp" customClass="SwipeController" customModule="Dupes" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wEc-xu-WII">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9PG-WE-1pM">
+                                <rect key="frame" x="76" y="362" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="PT4-6Y-EM7"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="ztL-ab-PSK"/>
+                    <connections>
+                        <outlet property="imageView" destination="9PG-WE-1pM" id="ubo-Jg-L1s"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Wo-Pg-scu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1705" y="5"/>
+            <point key="canvasLocation" x="1973" y="5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="aDw-nU-0p4">
