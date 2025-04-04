@@ -15,6 +15,7 @@ class SwipeController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        imageView.isUserInteractionEnabled = true
         print(assetsToDelete)
         // Do any additional setup after loading the view.
         // Create an instance of PHImageRequestOptions
@@ -38,7 +39,17 @@ class SwipeController: UIViewController {
         )
     }
     
-
+    @IBAction func panCard(_ sender: UIPanGestureRecognizer) {
+        print("Pan gesture recognized!")
+        let card = sender.view!
+        let point = sender.translation(in: view)
+        card.center = CGPoint(x: view.center.x + point.x, y: view.center.y + point.y)
+        if sender.state == UIGestureRecognizer.State.ended {
+            UIView.animate(withDuration: 0.4, animations: {
+                card.center = self.view.center
+            })
+        }
+    }
     /*
     // MARK: - Navigation
 
