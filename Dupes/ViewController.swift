@@ -30,7 +30,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         // Collect assets to delete
-        //assetsToDelete moved line ^^
+        assetsToDelete = []
         for result in results {
             print(result.assetIdentifier ?? "no value")
             if let assetIdentifier = result.assetIdentifier {

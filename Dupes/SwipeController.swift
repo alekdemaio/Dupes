@@ -27,6 +27,7 @@ class SwipeController: UIViewController {
     
     func getNextImage() {
         print("Image Number \(index)")
+        print(assetsToDelete.count)
         let options = PHImageRequestOptions()
         options.isSynchronous = false         // Perform asynchronously (do not block the main thread)
         options.isNetworkAccessAllowed = true // Allow fetching from iCloud if image is not available locally
@@ -87,7 +88,13 @@ class SwipeController: UIViewController {
     func resetCard(_ card: UIView) {
         UIView.animate(withDuration: 0.2, animations: {
             card.center = self.view.center
-            card.alpha = 1
+            if self.index >= self.assetsToDelete.count {
+                //sets card to transparent when at the end
+                card.alpha = 0
+            }
+            else {
+                card.alpha = 1
+            }
         })
     }
     /*
