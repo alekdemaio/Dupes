@@ -45,6 +45,22 @@ class SwipeController: UIViewController {
         let point = sender.translation(in: view)
         card.center = CGPoint(x: view.center.x + point.x, y: view.center.y + point.y)
         if sender.state == UIGestureRecognizer.State.ended {
+            
+            if card.center.x < 75 {
+                //move off left and add to list to delte
+                UIView.animate(withDuration: 0.3, animations: {
+                    card.center = CGPoint(x: card.center.x - 200, y: card.center.y + 75)
+                    card.alpha = 0
+                })
+                return
+            } else if card.center.x > view.frame.width - 75 {
+                UIView.animate(withDuration: 0.3, animations: {
+                    card.center = CGPoint(x: card.center.x + 200, y: card.center.y + 75)
+                    card.alpha = 0
+                })
+                return
+            }
+            
             UIView.animate(withDuration: 0.4, animations: {
                 card.center = self.view.center
             })
