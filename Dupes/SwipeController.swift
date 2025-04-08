@@ -52,7 +52,6 @@ class SwipeController: UIViewController {
                 }
             }
         )
-        index+=1;
     }
     
     @IBAction func panCard(_ sender: UIPanGestureRecognizer) {
@@ -69,7 +68,8 @@ class SwipeController: UIViewController {
                     card.alpha = 0
                 })
                 // list of actual delete values after all cards are panned through -- NOT TESTED
-                deleteList.append(assetsToDelete[index-1])
+                deleteList.append(assetsToDelete[index])
+                index += 1 // increment index
                 getNextImage()
                 resetCard(card)
                 return
@@ -78,6 +78,7 @@ class SwipeController: UIViewController {
                     card.center = CGPoint(x: card.center.x + 200, y: card.center.y + 75)
                     card.alpha = 0
                 })
+                index += 1
                 getNextImage()
                 resetCard(card)
                 return
