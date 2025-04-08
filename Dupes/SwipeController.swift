@@ -36,6 +36,7 @@ class SwipeController: UIViewController {
             print("No more images")
             print(deleteList)
             // POTENTIALLY RETURN TO MAIN MENU HERE AND PERFORM DELETIONS ON LIST | DELETE LIST
+            deletePhotos(withAssetIdentifiers: deleteList)
             return
         }
         PHImageManager.default().requestImage(for: assetsToDelete[index], targetSize: PHImageManagerMaximumSize, contentMode: .aspectFit, options: options, resultHandler: { image, info in
@@ -97,6 +98,30 @@ class SwipeController: UIViewController {
                 card.alpha = 1
             }
         })
+    }
+    
+    func deletePhotos(withAssetIdentifiers assets: [PHAsset]) {
+        let assetIdentifiers = assets.map { $0.localIdentifier } // Extract localIdentifiers
+
+        PHPhotoLibrary.shared().performChanges({
+            // Fetch assets using the extracted identifiers
+            let fetchedAssets = PHAsset.fetchAssets(withLocalIdentifiers: assetIdentifiers, options: nil)
+
+            // Convert PHFetchResult<PHAsset> to an array
+            let assetsArray = (0..<fetchedAssets.count).map { fetchedAssets.object(at: $0) }
+
+            // Delete the assets
+            PHAssetChangeRequest.deleteAssets(assetsArray as NSFastEnumeration)
+
+        }) { success, error in
+            DispatchQueue.main.async {
+                if success {
+                    print("Photos deleted successfully!")
+                } else {
+                    print("Error deleting photos: \(error?.localizedDescription ?? "Unknown error")")
+                }
+            }
+        }
     }
     /*
     // MARK: - Navigation
