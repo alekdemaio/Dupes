@@ -12,6 +12,8 @@ class SwipeController: UIViewController {
     
     @IBOutlet weak var imageView: UIImageView!
     var assetsToDelete: [PHAsset] = []
+    var deleteList: [PHAsset] = []
+    var index: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,11 +21,23 @@ class SwipeController: UIViewController {
         print(assetsToDelete)
         // Do any additional setup after loading the view.
         // Create an instance of PHImageRequestOptions
+        getNextImage()
+        
+    }
+    
+    func getNextImage() {
+        print("Image Number \(index)")
         let options = PHImageRequestOptions()
         options.isSynchronous = false         // Perform asynchronously (do not block the main thread)
         options.isNetworkAccessAllowed = true // Allow fetching from iCloud if image is not available locally
         options.deliveryMode = .highQualityFormat // Request high-quality format
-        PHImageManager.default().requestImage(for: assetsToDelete[0], targetSize: PHImageManagerMaximumSize, contentMode: .aspectFit, options: options, resultHandler: { image, info in
+        if index >= assetsToDelete.count {
+            print("No more images")
+            print(deleteList)
+            // POTENTIALLY RETURN TO MAIN MENU HERE AND PERFORM DELETIONS ON LIST | DELETE LIST
+            return
+        }
+        PHImageManager.default().requestImage(for: assetsToDelete[index], targetSize: PHImageManagerMaximumSize, contentMode: .aspectFit, options: options, resultHandler: { image, info in
                 if let image = image {
                     // Image was successfully retrieved
                     // Do something with the image (e.g., display it in an UIImageView)
@@ -37,6 +51,7 @@ class SwipeController: UIViewController {
                 }
             }
         )
+        index+=1;
     }
     
     @IBAction func panCard(_ sender: UIPanGestureRecognizer) {
@@ -47,24 +62,33 @@ class SwipeController: UIViewController {
         if sender.state == UIGestureRecognizer.State.ended {
             
             if card.center.x < 75 {
-                //move off left and add to list to delte
+                // move off left and add to list to delete
                 UIView.animate(withDuration: 0.3, animations: {
                     card.center = CGPoint(x: card.center.x - 200, y: card.center.y + 75)
                     card.alpha = 0
                 })
+                // list of actual delete values after all cards are panned through -- NOT TESTED
+                deleteList.append(assetsToDelete[index-1])
+                getNextImage()
+                resetCard(card)
                 return
             } else if card.center.x > view.frame.width - 75 {
                 UIView.animate(withDuration: 0.3, animations: {
                     card.center = CGPoint(x: card.center.x + 200, y: card.center.y + 75)
                     card.alpha = 0
                 })
+                getNextImage()
+                resetCard(card)
                 return
             }
-            
-            UIView.animate(withDuration: 0.4, animations: {
-                card.center = self.view.center
-            })
         }
+    }
+    
+    func resetCard(_ card: UIView) {
+        UIView.animate(withDuration: 0.2, animations: {
+            card.center = self.view.center
+            card.alpha = 1
+        })
     }
     /*
     // MARK: - Navigation
