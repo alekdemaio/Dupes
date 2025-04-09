@@ -21,8 +21,25 @@ class SwipeController: UIViewController {
         print(assetsToDelete)
         // Do any additional setup after loading the view.
         // Create an instance of PHImageRequestOptions
+        // Add pinch gesture
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch(_:)))
+        imageView.addGestureRecognizer(pinchGesture)
         getNextImage()
         
+    }
+    
+    @objc func handlePinch(_ gesture: UIPinchGestureRecognizer) {
+        if gesture.state == .began || gesture.state == .changed {
+            imageView.transform = imageView.transform.scaledBy(x: gesture.scale, y: gesture.scale)
+            gesture.scale = 1.0 // Reset scale
+        }
+        else if gesture.state == .ended || gesture.state == .cancelled {
+            // Return to original position and scale when the gesture ends
+            UIView.animate(withDuration: 0.3) {
+                self.imageView.transform = .identity // Resets to original transform
+                self.imageView.center = self.view.center // Centers the image
+            }
+        }
     }
     
     func getNextImage() {
@@ -84,6 +101,7 @@ class SwipeController: UIViewController {
                 resetCard(card)
                 return
             }
+            resetCard(card)
         }
     }
     
