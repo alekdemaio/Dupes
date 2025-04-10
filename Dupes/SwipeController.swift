@@ -11,7 +11,7 @@ import PhotosUI
 class SwipeController: UIViewController {
     
     @IBOutlet weak var imageView: UIImageView!
-    var assetsToDelete: [PHAsset] = []
+    var assetsToSwipe: [PHAsset] = []
     var deleteList: [PHAsset] = []
     var index: Int = 0
     
@@ -19,7 +19,7 @@ class SwipeController: UIViewController {
         super.viewDidLoad()
         imageView.isUserInteractionEnabled = true
         
-        print(assetsToDelete)
+        print(assetsToSwipe)
 
         let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch(_:)))
         imageView.addGestureRecognizer(pinchGesture)
@@ -44,21 +44,21 @@ class SwipeController: UIViewController {
     
     func getNextImage() {
         print("Image Number \(index)")
-        print(assetsToDelete.count)
+        print(assetsToSwipe.count)
         
         let options = PHImageRequestOptions()
         options.isSynchronous = false         // Perform asynchronously (do not block the main thread)
         options.isNetworkAccessAllowed = true // Allow fetching from iCloud if image is not available locally
         options.deliveryMode = .highQualityFormat // Request high-quality format
         
-        if index >= assetsToDelete.count {
+        if index >= assetsToSwipe.count {
             print("No more images")
             print(deleteList)
             
             deletePhotos(withAssetIdentifiers: deleteList)
             return
         }
-        PHImageManager.default().requestImage(for: assetsToDelete[index], targetSize: PHImageManagerMaximumSize, contentMode: .aspectFit, options: options, resultHandler: { image, info in
+        PHImageManager.default().requestImage(for: assetsToSwipe[index], targetSize: PHImageManagerMaximumSize, contentMode: .aspectFit, options: options, resultHandler: { image, info in
                 if let image = image {
                     // Image was successfully retrieved
                     // Do something with the image (e.g., display it in an UIImageView)
@@ -88,7 +88,7 @@ class SwipeController: UIViewController {
                     card.alpha = 0
                 })
                 // List of actual delete values after all cards are panned through -- NOT TESTED
-                deleteList.append(assetsToDelete[index])
+                deleteList.append(assetsToSwipe[index])
                 index += 1 // increment index
                 getNextImage()
                 resetCard(card)
@@ -110,7 +110,7 @@ class SwipeController: UIViewController {
     func resetCard(_ card: UIView) {
         UIView.animate(withDuration: 0.2, animations: {
             card.center = self.view.center
-            if self.index >= self.assetsToDelete.count {
+            if self.index >= self.assetsToSwipe.count {
                 // Sets card to transparent when at the end
                 card.alpha = 0
             }

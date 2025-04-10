@@ -10,7 +10,7 @@ import PhotosUI
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, PHPickerViewControllerDelegate {
     
-    var assetsToDelete: [PHAsset] = []
+    var assetsToSwipe: [PHAsset] = []
     
     // Request authorization to modify the photo library
     func requestPhotoLibraryAuthorization() {
@@ -28,18 +28,18 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         // Collect assets to delete
-        assetsToDelete = []
+        assetsToSwipe = []
         for result in results {
             print(result.assetIdentifier ?? "no value")
             if let assetIdentifier = result.assetIdentifier {
                 let fetchResult = PHAsset.fetchAssets(withLocalIdentifiers: [assetIdentifier], options: nil)
-                assetsToDelete.append(fetchResult.object(at: 0))
+                assetsToSwipe.append(fetchResult.object(at: 0))
             }
         }
-        print(assetsToDelete)
+        print(assetsToSwipe)
         print(results)
         picker.dismiss(animated: true)
-        if !self.assetsToDelete.isEmpty {
+        if !self.assetsToSwipe.isEmpty {
             self.performSegue(withIdentifier: "toSwipeController", sender: self)
         } else {
             print("No assets selected")
@@ -50,8 +50,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toSwipeController",
            let destinationVC = segue.destination as? SwipeController {
-            print(!assetsToDelete.isEmpty)
-            destinationVC.assetsToDelete = self.assetsToDelete
+            print(!assetsToSwipe.isEmpty)
+            destinationVC.assetsToSwipe = self.assetsToSwipe
         }
     }
     @IBAction func openGalleryBtn(_ sender: Any) {
