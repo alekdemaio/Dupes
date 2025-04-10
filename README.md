@@ -6,26 +6,26 @@
 </table>
 <table>
   <tr>
-    <td>This is what will show when the button is pressed. This is where photos will be<br>chosen to be swiped through and potentially deleted.</td>
+    <td>This is what will show when the button is pressed. This is where photos will be  <br>chosen to be swiped through and potentially deleted.</td>
     <td><img src="https://github.com/alekdemaio/Dupes/blob/main/readme-images/IMG_5202.PNG" alt="Picker" width="100"></td>
   </tr>
 </table>
 <table>
   <tr>
     <td><img src="https://github.com/alekdemaio/Dupes/blob/main/readme-images/IMG_5200.PNG" alt="Center" width="100"></td>
-    <td>This is the page that is navigated to once the add button is pressed in the<br>picker. Each photo can be swiped one by one.</td>
+    <td>This is the page that is navigated to once the add button is pressed in the      <br>picker. Each photo can be swiped one by one.</td>
   </tr>
 </table>
 <table>
   <tr>
-    <td>Photos are swiped left to delete them.</td>
+    <td>Photos are swiped left to delete them.                                          </td>
     <td><img src="https://github.com/alekdemaio/Dupes/blob/main/readme-images/IMG_5204.PNG" alt="Left" width="100"></td>
   </tr>
 </table>
 <table>
   <tr>
     <td><img src="https://github.com/alekdemaio/Dupes/blob/main/readme-images/IMG_5205.PNG" alt="Right" width="100"></td>
-    <td>And right to keep them.</td>
+    <td>And right to keep them.                                                         </td>
   </tr>
 </table>
 <table>
