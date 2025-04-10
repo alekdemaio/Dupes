@@ -1,7 +1,7 @@
 <table>
   <tr>
     <td><img src="https://github.com/alekdemaio/Dupes/blob/main/readme-images/IMG_5203.PNG" alt="Home" width="100"></td>
-    <td style="width:100%;">This is the homepage of the app. More buttons will be added but "manually" is the<br>only deletion option right now.</td>
+    <td style="padding:10px; width:100%;">This is the homepage of the app. More buttons will be added but "manually" is the<br>only deletion option right now.</td>
   </tr>
 </table>
 <table>
