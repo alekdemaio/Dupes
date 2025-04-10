@@ -1,5 +1,5 @@
 <h1>Dupes v1</h1>
-<body>Below is the description for how to use the first version of Dupes.<br>It is currently being reviewed by Apple and is not available for download.</body>
+<body>Below is the description for how to use the first version of Dupes.<br>It is currently being reviewed by Apple and is not available for download.<br></body>
 <table>
   <tr>
     <td><img src="https://github.com/alekdemaio/Dupes/blob/main/readme-images/IMG_5203.PNG" alt="Home" width="200"></td>
