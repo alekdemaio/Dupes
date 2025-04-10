@@ -1,5 +1,11 @@
 <h1>Dupes v1</h1>
-<body>Below is the description for how to use the first version of Dupes.<br>It is currently being reviewed by Apple and is not yet available for download.</body>
+<h2>Below is the description for how to use the first version of Dupes.<br>It is currently being reviewed by Apple and is not yet available for download.</h2>
+<body>Features to be added</body>
+<ul>
+  <li>First item</li>
+  <li>Second item</li>
+  <li>Third item</li>
+</ul>
 <br></br>
 <table>
   <tr>
