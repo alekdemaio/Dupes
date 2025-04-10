@@ -2,10 +2,11 @@
 <h2>Below is the description for how to use the first version of Dupes.<br>It is currently being reviewed by Apple and is not yet available for download.</h2>
 <body>Features to be added</body>
 <ul>
-  <li>First item</li>
-  <li>Second item</li>
-  <li>Third item</li>
+  <li>A new button that scans the user's library and shows them photo repeats to potentially be removed.</li>
+  <li>Zoom functionality on each swipeable card. This will function like Photos app zoom to see every detail.</li>
+  <li>Third item?</li>
 </ul>
+<br></br>
 <table>
   <tr>
     <td><img src="https://github.com/alekdemaio/Dupes/blob/main/readme-images/IMG_5203.PNG" alt="Home" width="200"></td>
