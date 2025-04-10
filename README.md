@@ -1,12 +1,12 @@
 <table>
   <tr>
     <td><img src="https://github.com/alekdemaio/Dupes/blob/main/readme-images/IMG_5203.PNG" alt="Home" width="100"></td>
-    <td><- This is the homepage of the app. More buttons will be added but "manually" is the<br>only deletion option right now.</td>
+    <td><pre><- This is the homepage of the app. More buttons will be added but "manually" is the<br>only deletion option right now.</pre></td>
   </tr>
 </table>
 <table>
   <tr>
-    <td>This is what will show when the button is pressed. This is where photos will be   -><br>chosen to be swiped through and potentially deleted.</td>
+    <td><pre>This is what will show when the button is pressed. This is where photos will be   -><br>chosen to be swiped through and potentially deleted.</pre></td>
     <td><img src="https://github.com/alekdemaio/Dupes/blob/main/readme-images/IMG_5202.PNG" alt="Picker" width="100"></td>
   </tr>
 </table>
