@@ -6,7 +6,7 @@
 </table>
 <table>
   <tr>
-    <td style="width:120%;">This is what will show when the button is pressed. This is where photos will be<br>chosen to be swiped through and potentially deleted.</td>
+    <td style="width:150%;">This is what will show when the button is pressed. This is where photos will be<br>chosen to be swiped through and potentially deleted.</td>
     <td><img src="https://github.com/alekdemaio/Dupes/blob/main/readme-images/IMG_5202.PNG" alt="Picker" width="100"></td>
   </tr>
 </table>
