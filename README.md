@@ -33,7 +33,7 @@
 </table>
 <table>
   <tr>
-    <td><pre>Upon swiping through all the photos this pop-up will appear to make sure the user <br>is positive they want these photos deleted.</pre></td>
+    <td><pre>Upon swiping through all the photos this pop-up will appear to make sure the user <br>is certain they want these photos deleted.</pre></td>
     <td><img src="https://github.com/alekdemaio/Dupes/blob/main/readme-images/IMG_5206.PNG" alt="Deletion" width="200"></td>
   </tr>
 </table>
