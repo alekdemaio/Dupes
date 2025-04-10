@@ -18,12 +18,12 @@ class SwipeController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         imageView.isUserInteractionEnabled = true
+        
         print(assetsToDelete)
-        // Do any additional setup after loading the view.
-        // Create an instance of PHImageRequestOptions
-        // Add pinch gesture
+
         let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch(_:)))
         imageView.addGestureRecognizer(pinchGesture)
+        
         getNextImage()
         
     }
@@ -45,14 +45,16 @@ class SwipeController: UIViewController {
     func getNextImage() {
         print("Image Number \(index)")
         print(assetsToDelete.count)
+        
         let options = PHImageRequestOptions()
         options.isSynchronous = false         // Perform asynchronously (do not block the main thread)
         options.isNetworkAccessAllowed = true // Allow fetching from iCloud if image is not available locally
         options.deliveryMode = .highQualityFormat // Request high-quality format
+        
         if index >= assetsToDelete.count {
             print("No more images")
             print(deleteList)
-            // POTENTIALLY RETURN TO MAIN MENU HERE AND PERFORM DELETIONS ON LIST | DELETE LIST
+            
             deletePhotos(withAssetIdentifiers: deleteList)
             return
         }
