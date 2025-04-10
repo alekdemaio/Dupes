@@ -6,7 +6,6 @@
   <li>Second item</li>
   <li>Third item</li>
 </ul>
-<br></br>
 <table>
   <tr>
     <td><img src="https://github.com/alekdemaio/Dupes/blob/main/readme-images/IMG_5203.PNG" alt="Home" width="200"></td>
