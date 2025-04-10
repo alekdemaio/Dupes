@@ -82,12 +82,12 @@ class SwipeController: UIViewController {
         if sender.state == UIGestureRecognizer.State.ended {
             
             if card.center.x < 75 {
-                // move off left and add to list to delete
+                // Move off left and add to list to delete
                 UIView.animate(withDuration: 0.3, animations: {
                     card.center = CGPoint(x: card.center.x - 200, y: card.center.y + 75)
                     card.alpha = 0
                 })
-                // list of actual delete values after all cards are panned through -- NOT TESTED
+                // List of actual delete values after all cards are panned through -- NOT TESTED
                 deleteList.append(assetsToDelete[index])
                 index += 1 // increment index
                 getNextImage()
@@ -111,7 +111,7 @@ class SwipeController: UIViewController {
         UIView.animate(withDuration: 0.2, animations: {
             card.center = self.view.center
             if self.index >= self.assetsToDelete.count {
-                //sets card to transparent when at the end
+                // Sets card to transparent when at the end
                 card.alpha = 0
             }
             else {
@@ -143,14 +143,4 @@ class SwipeController: UIViewController {
             }
         }
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

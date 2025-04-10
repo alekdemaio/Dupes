@@ -7,7 +7,6 @@
 
 import UIKit
 import PhotosUI
-//import PHPhotoLibrary //look into this, probably method to remove pics
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, PHPickerViewControllerDelegate {
     
@@ -22,7 +21,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                     print("Photo library access granted")
                 default:
                     print("Photo library access blocked")
-                    //implement popup
                 }
             }
         }
@@ -38,7 +36,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                 assetsToDelete.append(fetchResult.object(at: 0))
             }
         }
-        //deletePhotos(withAssetIdentifiers: assetsToDelete)
         print(assetsToDelete)
         print(results)
         picker.dismiss(animated: true)
@@ -68,4 +65,3 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         present(picker, animated: true)
     }
 }
-
