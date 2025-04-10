@@ -5,7 +5,6 @@
   <li>A button that scans the user's library and shows them photo repeats to potentially be removed.</li>
   <li>Zoom functionality on each swipeable card. This will function like Photos app zoom to see every detail.</li>
 </ul>
-<br></br>
 <table>
   <tr>
     <td><img src="https://github.com/alekdemaio/Dupes/blob/main/readme-images/IMG_5203.PNG" alt="Home" width="200"></td>
