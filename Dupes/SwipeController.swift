@@ -19,6 +19,7 @@ class SwipeController: UIViewController, UIGestureRecognizerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         imageView.isUserInteractionEnabled = true
+        self.navigationItem.setHidesBackButton(true, animated: true)
         
         print(assetsToSwipe)
 
