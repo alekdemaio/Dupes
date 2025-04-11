@@ -8,12 +8,13 @@
 import UIKit
 import PhotosUI
 
-class SwipeController: UIViewController {
+class SwipeController: UIViewController, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var imageView: UIImageView!
     var assetsToSwipe: [PHAsset] = []
     var deleteList: [PHAsset] = []
     var index: Int = 0
+    private var initialCenter: CGPoint = .zero
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,11 +22,29 @@ class SwipeController: UIViewController {
         
         print(assetsToSwipe)
 
-        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch(_:)))
-        imageView.addGestureRecognizer(pinchGesture)
+        setupGestures()
         
         getNextImage()
         
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer,
+                          shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+    
+    func setupGestures() {
+        // Pinch gesture
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch(_:)))
+        imageView.addGestureRecognizer(pinchGesture)
+        
+        // Pan gesture
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(panCard(_:)))
+        imageView.addGestureRecognizer(panGesture)
+        
+        // Allow simultaneous gestures
+        pinchGesture.delegate = self
+        panGesture.delegate = self
     }
     
     @objc func handlePinch(_ gesture: UIPinchGestureRecognizer) {
@@ -74,12 +93,22 @@ class SwipeController: UIViewController {
         )
     }
     
-    @IBAction func panCard(_ sender: UIPanGestureRecognizer) {
+    @objc func panCard(_ sender: UIPanGestureRecognizer) {
         print("Pan gesture recognized!")
         let card = sender.view!
-        let point = sender.translation(in: view)
-        card.center = CGPoint(x: view.center.x + point.x, y: view.center.y + point.y)
-        if sender.state == UIGestureRecognizer.State.ended {
+        if sender.state == .began {
+            // Save the initial center position
+            initialCenter = card.center
+        }
+        
+        if sender.state == .began || sender.state == .changed {
+            // Get the translation
+            let translation = sender.translation(in: view)
+            
+            // Move the card
+            card.center = CGPoint(x: view.center.x + translation.x, y: view.center.y + translation.y)
+        }
+        else if sender.state == UIGestureRecognizer.State.ended {
             
             if card.center.x < 75 {
                 // Move off left and add to list to delete
