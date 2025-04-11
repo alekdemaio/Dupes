@@ -169,6 +169,7 @@ class SwipeController: UIViewController, UIGestureRecognizerDelegate {
                 } else {
                     print("Error deleting photos: \(error?.localizedDescription ?? "Unknown error")")
                 }
+                self.navigationController?.popToRootViewController(animated: true)
             }
         }
     }
