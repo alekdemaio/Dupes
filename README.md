@@ -41,3 +41,4 @@
     <td><img src="https://github.com/alekdemaio/Dupes/blob/main/readme-images/IMG_5206.PNG" alt="Deletion" width="200"></td>
   </tr>
 </table>
+<body>The photos used in the screenshots are designed by Freepik</body>
