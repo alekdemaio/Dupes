@@ -24,7 +24,6 @@ class SwipeController: UIViewController, UIGestureRecognizerDelegate {
         print(assetsToSwipe)
 
         setupGestures()
-        
         getNextImage()
         
     }
