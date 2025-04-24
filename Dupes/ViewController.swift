@@ -64,4 +64,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         picker.delegate = self
         present(picker, animated: true)
     }
+    
+    @IBAction func vacationsBtn(_ sender: Any) {
+        self.performSegue(withIdentifier: "toVacationController", sender: self)
+    }
 }
